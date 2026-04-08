@@ -354,8 +354,193 @@
         }
 
         
-        #magnifier-toggle:checked ~ .magnifying-glass {
+        .detail-target {
+            cursor: zoom-in;
+            border-radius: 18px;
+        }
+
+        .detail-target:hover {
+            outline: 2px dashed rgba(186, 107, 93, 0.42);
+            outline-offset: 8px;
+        }
+
+        body.magnifier-mode {
+            cursor: crosshair;
+        }
+
+        body.magnifier-mode .magnifying-glass {
             display: block;
+        }
+
+        .magnifying-glass.is-active {
+            display: block;
+        }
+
+        .tool-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 999px;
+            background: rgba(253, 250, 240, 0.18);
+            border: 1px solid rgba(253, 250, 240, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 10px 24px rgba(0,0,0,0.22);
+        }
+
+        .tool-group-label {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            align-self: center;
+            color: rgba(253, 250, 240, 0.72);
+            font-size: 9px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .nav-tool-btn.active {
+            background: #f5d58e;
+            box-shadow: 0 0 0 3px rgba(253, 250, 240, 0.48), 0 8px 18px rgba(0,0,0,0.28);
+        }
+
+        .page-sticker {
+            position: absolute;
+            right: -18px;
+            top: 52px;
+            z-index: 70;
+            width: 86px;
+            height: 74px;
+            border: 2px solid rgba(139, 46, 46, 0.42);
+            border-radius: 28px 22px 30px 18px;
+            background: linear-gradient(145deg, #ffe7a7, #ffd1dc 58%, #f5b8cf);
+            color: #8b2e2e;
+            font-family: 'Caveat', cursive;
+            font-size: 24px;
+            line-height: 1;
+            display: grid;
+            place-items: center;
+            transform: rotate(8deg);
+            box-shadow: 2px 8px 14px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .page-sticker::after {
+            content: 'look';
+            position: absolute;
+            bottom: 9px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 8px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(139, 46, 46, 0.72);
+        }
+
+        .page-sticker:hover {
+            transform: rotate(4deg) scale(1.05);
+        }
+
+        .spawned-sticker {
+            background: linear-gradient(145deg, #fff0b3, #ffd1dc 58%, #c7f0d8);
+            border: 2px solid rgba(139, 46, 46, 0.34);
+            border-radius: 28px 22px 30px 18px;
+            display: grid;
+            place-items: center;
+            font-family: 'Caveat', cursive;
+            font-size: 24px;
+            color: #8b2e2e;
+            box-shadow: 2px 8px 14px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .detail-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 42%, rgba(253, 250, 240, 0.16), transparent 26%),
+                rgba(61, 43, 31, 0.95);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.26s ease;
+        }
+
+        .detail-overlay.is-open {
+            display: block;
+            opacity: 1;
+        }
+
+        .detail-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: #f5d58e;
+            border: 2px solid rgba(139, 105, 20, 0.42);
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1001;
+        }
+
+        .detail-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(780px, calc(100vw - 140px));
+            max-height: min(760px, calc(100vh - 150px));
+            overflow: auto;
+            background: var(--paper-cream);
+            border: 12px solid #eac87b;
+            border-radius: 26px;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.52), inset 0 0 0 1px rgba(44,36,29,0.12);
+            padding: 34px;
+            background-image:
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+
+        .detail-kicker {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #8b2e2e;
+            margin-bottom: 10px;
+        }
+
+        .detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            line-height: 1.05;
+            font-style: italic;
+            margin-bottom: 18px;
+        }
+
+        .detail-body {
+            display: grid;
+            gap: 18px;
+            color: #3b3024;
+        }
+
+        .detail-visual {
+            border-radius: 20px;
+            background: rgba(255,255,255,0.45);
+            border: 1px solid rgba(44,36,29,0.12);
+            padding: 18px;
+        }
+
+        .detail-visual img,
+        .detail-visual svg {
+            max-height: 360px;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+        .detail-note {
+            font-family: 'Caveat', cursive;
+            font-size: 24px;
+            line-height: 1.35;
         }
 
     </style>
@@ -1142,8 +1327,8 @@ video {
         </svg>
     </div>
 
-    <!-- MESSY PAPERCLIP PILE - Source to pick from -->
-    <div class="desk-tool paperclip-pile" style="bottom: 90px; left: 60px; width: 120px; height: 100px; cursor: pointer;" vid="120" title="Paperclip pile - Click side panel to pick up one">
+    <!-- DECORATIVE PAPERCLIP PILE - desk stationery only; side attachment tool is replaced by sticker maker -->
+    <div class="desk-tool paperclip-pile" style="bottom: 90px; left: 60px; width: 120px; height: 100px;" vid="120" title="Decorative paperclip pile">
         <svg width="120" height="100" viewBox="0 0 120 100" style="filter: drop-shadow(3px 6px 10px rgba(0,0,0,0.35));" vid="121">
             <defs vid="122">
                 <linearGradient id="clipSilver" x1="0%" y1="0%" x2="100%" y2="100%" vid="123">
@@ -1267,118 +1452,67 @@ video {
     </div>
 
     <!-- MAGNIFYING GLASS OVERLAY / DETAIL VIEW -->
-    <div id="magnify-overlay" style="display: none; position: fixed; inset: 0; background: rgba(61, 43, 31, 0.95); z-index: 1000; cursor: crosshair;" vid="188">
-        <!-- Close button -->
-        <button id="close-magnify" style="position: absolute; top: 30px; right: 30px; background: #eac87b; border: none; padding: 12px 24px; border-radius: 8px; font-family: 'IBM Plex Mono', monospace; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1001;" vid="189">Close Detail View</button>
-        
-        <!-- Zoomed notebook area -->
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(2.5); width: 550px; height: 380px; background: var(--paper-cream); border-radius: 4px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); padding: 40px; background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 25px 25px;" vid="190">
-            <!-- Zoomed content showing left page detail -->
-            <div style="opacity: 0.8;" vid="191">
-                <div style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; font-style: italic; margin-bottom: 15px; color: var(--ink-sepia);" vid="192">Amanita</div>
-                
-                <!-- Enlarged mushroom sketch detail -->
-                <svg width="280" height="200" style="margin: 20px auto; display: block;" vid="193">
-                    <!-- Stem -->
-                    <path d="M140 180 L140 80 Q140 70 150 70 L170 70 Q180 70 180 80 L180 180" fill="#8b7355" stroke="#5c4a3a" stroke-width="2" vid="194"></path>
-                    <!-- Bulb -->
-                    <ellipse cx="160" cy="185" rx="25" ry="15" fill="#a08b6d" stroke="#5c4a3a" stroke-width="2" vid="195"></ellipse>
-                    <!-- Cap underside gills -->
-                    <ellipse cx="160" cy="75" rx="60" ry="20" fill="#f4f1e1" stroke="#d4a86a" stroke-width="1" vid="196"></ellipse>
-                    <!-- Gill lines -->
-                    <line x1="130" y1="70" x2="125" y2="80" stroke="#d4a86a" stroke-width="0.5" vid="197"></line>
-                    <line x1="145" y1="65" x2="140" y2="80" stroke="#d4a86a" stroke-width="0.5" vid="198"></line>
-                    <line x1="160" y1="55" x2="160" y2="75" stroke="#d4a86a" stroke-width="0.5" vid="199"></line>
-                    <line x1="175" y1="65" x2="180" y2="80" stroke="#d4a86a" stroke-width="0.5" vid="200"></line>
-                    <line x1="190" y1="70" x2="195" y2="80" stroke="#d4a86a" stroke-width="0.5" vid="201"></line>
-                    <!-- Cap top -->
-                    <path d="M100 75 Q100 20 160 15 Q220 20 220 75" fill="#c4443a" stroke="#8b2e26" stroke-width="2" vid="202"></path>
-                    <!-- White warts - velar remnants -->
-                    <ellipse cx="120" cy="45" rx="8" ry="6" fill="#f4f1e1" opacity="0.9" vid="203"></ellipse>
-                    <ellipse cx="145" cy="35" rx="6" ry="5" fill="#f4f1e1" opacity="0.85" vid="204"></ellipse>
-                    <ellipse cx="160" cy="30" rx="5" ry="4" fill="#f4f1e1" opacity="0.9" vid="205"></ellipse>
-                    <ellipse cx="175" cy="38" rx="7" ry="5" fill="#f4f1e1" opacity="0.8" vid="206"></ellipse>
-                    <ellipse cx="195" cy="48" rx="6" ry="5" fill="#f4f1e1" opacity="0.9" vid="207"></ellipse>
-                    <ellipse cx="140" cy="55" rx="4" ry="3" fill="#f4f1e1" opacity="0.7" vid="208"></ellipse>
-                    <ellipse cx="180" cy="58" rx="5" ry="4" fill="#f4f1e1" opacity="0.85" vid="209"></ellipse>
-                    <!-- Ring/annulus -->
-                    <ellipse cx="160" cy="85" rx="22" ry="8" fill="#f4f1e1" stroke="#d4a86a" stroke-width="1" vid="210"></ellipse>
-                    
-                    <!-- Annotation leader lines -->
-                    <line x1="70" y1="50" x2="112" y2="45" stroke="#3d2b1f" stroke-width="1" stroke-dasharray="3,2" vid="211"></line>
-                    <text x="20" y="55" font-family="Caveat, cursive" font-size="16" fill="#3d2b1f" vid="212">Velar remnants</text>
-                    
-                    <line x1="220" y1="100" x2="182" y2="88" stroke="#3d2b1f" stroke-width="1" stroke-dasharray="3,2" vid="213"></line>
-                    <text x="230" y="105" font-family="Caveat, cursive" font-size="16" fill="#3d2b1f" vid="214">Annulus (ring)</text>
-                </svg>
-                
-                <!-- Zoomed annotations -->
-                <div style="font-family: 'Caveat', cursive; font-size: 14px; line-height: 1.5; color: #3b3024; margin-top: 15px;" vid="215">
-                    <p style="margin: 5px 0;" vid="216">• Cap diameter: ~8-10cm observed</p>
-                    <p style="margin: 5px 0;" vid="217">• Wart density: Moderate, irregular distribution</p>
-                    <p style="margin: 5px 0;" vid="218">• Gill attachment: Free, crowded</p>
-                    <p style="margin: 5px 0;" vid="219">• Stem: 12cm height, 1.8cm width at apex</p>
-                </div>
-            </div>
+    <div id="magnify-overlay" class="detail-overlay" aria-hidden="true" vid="188">
+        <button id="close-magnify" class="detail-close" vid="189">Close Detail View</button>
+        <div class="detail-card" role="dialog" aria-modal="true" aria-labelledby="detail-title" vid="190">
+            <div class="detail-kicker" id="detail-kicker" vid="191">Field Detail</div>
+            <h2 class="detail-title" id="detail-title" vid="192">Specimen Detail</h2>
+            <div class="detail-body" id="detail-body" vid="193"></div>
         </div>
-        
-        <!-- Mini tools in detail view -->
         <div style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px;" vid="220">
-            <button style="background: #fdfaf0; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'IBM Plex Mono'; font-size: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" title="Add annotation" vid="221">✎ Annotate</button>
-            <button style="background: #fdfaf0; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'IBM Plex Mono'; font-size: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" title="Measure" vid="222">📏 Measure</button>
-            <button style="background: #fdfaf0; border: none; padding: 10px 20px; border-radius: 8px; font-family: 'IBM Plex Mono'; font-size: 12px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" title="Add color swatch" vid="223">🎨 Sample</button>
+            <button class="detail-close" style="position: static;" title="Add annotation" vid="221">✎ Annotate</button>
+            <button class="detail-close" style="position: static;" title="Measure" vid="222">📏 Measure</button>
+            <button class="detail-close" style="position: static;" title="Add color swatch" vid="223">🎨 Sample</button>
         </div>
     </div>
 
-    <!-- REMOVED: Checkbox toggle - using pure JS instead -->
+    <div class="magnifying-glass" id="glass" vid="224"></div>
     
-    <nav class="side-nav" vid="224">
-        <!-- Big Finger Touch Target - Add Observation -->
-        <div class="nav-tool-btn" style="width: 70px; height: 70px; background: linear-gradient(135deg, #eac87b, #d4b483); border: 2px solid #8b6914;" title="Add Observation (Touch Friendly)" vid="225">
+    <nav class="side-nav" aria-label="Notebook tools" vid="224">
+        <div class="tool-group" data-tool-group="object-spawn" vid="225">
+        <span class="tool-group-label" vid="226">Spawn</span>
+        <div class="nav-tool-btn camera-btn" data-tool-kind="object-spawn" data-tool="camera" style="width: 70px; height: 70px; background: linear-gradient(135deg, #eac87b, #d4b483); border: 2px solid #8b6914;" title="Camera Action" vid="227">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 32px; height: 32px;" vid="226">
-                <line x1="12" y1="5" x2="12" y2="19" vid="227"></line>
-                <line x1="5" y1="12" x2="19" y2="12" vid="228"></line>
+                <rect x="3" y="6" width="18" height="12" rx="2" vid="228"></rect>
+                <circle cx="12" cy="12" r="3" vid="229"></circle>
+                <path d="M8 6h8" vid="230"></path>
+                <circle cx="18" cy="9" r="1.5" fill="currentColor" vid="231"></circle>
             </svg>
         </div>
+
+        <div class="nav-tool-btn sticker-btn" data-tool-kind="object-spawn" data-tool="sticker" title="Sticker Maker" vid="243">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="244">
+                <path d="M5 4h10l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" vid="245"></path>
+                <path d="M15 4v5h5" vid="246"></path>
+                <path d="M8 13c1.2-1.5 2.6-1.5 4 0s2.8 1.5 4 0" vid="247"></path>
+                <path d="M8 16h6" vid="248"></path>
+            </svg>
+        </div>
+        </div>
         
-        <div class="nav-tool-btn" title="Notebook View" vid="229">
+        <div class="tool-group" data-tool-group="view-mode" vid="249">
+        <span class="tool-group-label" vid="250">View</span>
+        <div class="nav-tool-btn notebook-btn active" data-tool-kind="view-mode" data-tool="notebook" title="Notebook View" vid="229">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="230">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" vid="231"></path>
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" vid="232"></path>
             </svg>
         </div>
         
-        <!-- Magnifying Glass - NOT a label, just a div for pickup behavior -->
-        <div class="nav-tool-btn magnifier-btn" title="Magnifying Glass" vid="233">
+        <div class="nav-tool-btn magnifier-btn" data-tool-kind="view-mode" data-tool="magnifier" title="Magnifying Glass" vid="233">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="234">
                 <circle cx="11" cy="11" r="8" vid="235"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65" vid="236"></line>
             </svg>
         </div>
-        
-        <!-- Camera Capture Button -->
-        <div class="nav-tool-btn camera-btn" title="Capture Photo" vid="237">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="238">
-                <rect x="3" y="6" width="18" height="12" rx="2" vid="239"></rect>
-                <circle cx="12" cy="12" r="3" vid="240"></circle>
-                <path d="M8 6h8" vid="241"></path>
-                <circle cx="18" cy="9" r="1.5" fill="currentColor" vid="242"></circle>
-            </svg>
-        </div>
-        
-        <!-- Paperclip Attachment -->
-        <div class="nav-tool-btn clip-btn" title="Attach Reference" vid="243">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="244">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" vid="245"></path>
-            </svg>
-        </div>
-        
-        <div class="nav-tool-btn" title="Archive" vid="246">
+
+        <div class="nav-tool-btn" data-tool-kind="view-mode" data-tool="archive" title="Archive" vid="246">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="247">
                 <path d="M21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44476 22 3 21.5552 3 20.9932V8" vid="248"></path>
                 <path d="M1 4.9932C1 4.44463 1.44476 4 1.9934 4H22.0066C22.5552 4 23 4.44463 23 4.9932V7.0068C23 7.55537 22.5552 8 22.0066 8H1.9934C1.44476 8 1 7.55537 1 7.0068V4.9932Z" vid="249"></path>
                 <path d="M10 12H14" vid="250"></path>
             </svg>
+        </div>
         </div>
     </nav>
 
@@ -1390,9 +1524,10 @@ video {
         <div class="tab tab-1" vid="253">FLORA</div>
         <div class="tab tab-2" vid="254">FAUNA</div>
         <div class="tab tab-3" vid="255">MAPS</div>
+        <button class="page-sticker detail-target" type="button" data-detail-type="note" data-detail-kicker="Sticker Note" data-detail-title="Field sticker" data-detail-note="Tiny edge marker for fast field context. Desktop keeps it tactile; mobile should translate it into a bottom-sheet detail affordance." vid="255a">✿</button>
 
         
-        <section class="page page-left" vid="256">
+        <section class="page page-left detail-target" data-detail-type="note" data-detail-kicker="Notebook Page" data-detail-title="Amanita muscaria" data-detail-note="Found in a symbiotic relationship with nearby birch and pine. Notable red cap, white warts, and a distinct annulus. This target proves text/page regions can summon the same detail viewer as images and sketches." vid="256">
             <div class="metadata" vid="257">
                 <span vid="258">REF: NAT_0492</span>
                 <span vid="259">LAT: 45.321°N | LON: 122.678°W</span>
@@ -1403,7 +1538,7 @@ video {
                 Found in a symbiotic relationship with nearby birch and pine. Notable for its iconic red cap and white warts. Specimen is approximately 12cm in height.
             </p>
 
-            <div class="sketch-container" vid="262">
+            <div class="sketch-container detail-target" data-detail-type="sketch" data-detail-kicker="Sketch Detail" data-detail-title="Amanita morphology" data-detail-note="Cap diameter: ~8-10cm observed. Wart density: moderate, irregular distribution. Gill attachment: free, crowded. Stem: 12cm height, 1.8cm width at apex." vid="262">
                 <img src="https://images.unsplash.com/photo-1590680425330-01968858a74e?auto=format&amp;fit=crop&amp;q=80&amp;w=600" alt="Mushroom Sketch" class="sketch" vid="263">
                 
                 
@@ -1431,20 +1566,20 @@ video {
             <h1 vid="276">Field Context</h1>
             
             <div class="relative h-[220px] mb-8" vid="277">
-                <div class="polaroid" style="top: 20px; left: 40px; transform: rotate(-4deg);" vid="278">
+                <div class="polaroid detail-target" data-detail-type="image" data-detail-kicker="Attached Photo" data-detail-title="Forest floor reference" data-detail-note="North Shelf habitat context. Tape, caption, and attached image targets should all open through the same detail-view renderer." style="top: 20px; left: 40px; transform: rotate(-4deg);" vid="278">
                     <div class="washi-tape washi-red" style="top: -10px; left: 50px; transform: rotate(10deg);" vid="279"></div>
                     <img src="https://images.unsplash.com/photo-1501004318641-72ee7f827fcb?auto=format&amp;fit=crop&amp;q=80&amp;w=400" alt="Forest Floor" vid="280">
                     <p class="handwritten text-center mt-2 text-sm" vid="281">Loc: North Shelf</p>
                 </div>
 
-                <div class="polaroid" style="top: 40px; right: 40px; transform: rotate(3deg);" vid="282">
+                <div class="polaroid detail-target" data-detail-type="image" data-detail-kicker="Attached Photo" data-detail-title="Spore print reference" data-detail-note="Microscopic reference card attached to the notebook spread. This validates image-focused detail views." style="top: 40px; right: 40px; transform: rotate(3deg);" vid="282">
                     <div class="washi-tape washi-green" style="top: -8px; right: 30px; transform: rotate(-5deg);" vid="283"></div>
                     <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&amp;fit=crop&amp;q=80&amp;w=400" alt="Microscopic view" vid="284">
                     <p class="handwritten text-center mt-2 text-sm" vid="285">Spore Print #1</p>
                 </div>
             </div>
 
-            <div class="mt-20" vid="286">
+            <div class="mt-20 detail-target" data-detail-type="note" data-detail-kicker="Observation Log" data-detail-title="Rainfall and sample notes" data-detail-note="Heavy rainfall 48h prior accelerated emergence. Sample collection successful. Vials marked 042-A and 042-B. No visible contamination." vid="286">
                 <h2 class="font-bold border-b border-black mb-4 pb-2" vid="287">OBSERVATION LOG:</h2>
                 <p class="handwritten mb-4" vid="288">
                     Heavy rainfall 48h prior has accelerated the emergence of several colonies. This particular cluster shows signs of insect activity on the cap.
@@ -1462,54 +1597,134 @@ video {
     </main>
 
     <script vid="292">
-        // Utility: Make any element draggable
+        const uiState = {
+            magnifierMode: false,
+            isCarryingMagnifier: false,
+            ignoreNextMagnifierClick: false
+        };
+
         function makeDraggable(element) {
             let isDragging = false;
+            let moved = false;
             let offset = { x: 0, y: 0 };
-            
-            element.addEventListener('mousedown', (e) => {
-                if (element.id === 'magnify-overlay') return;
-                
+
+            element.addEventListener('mousedown', (event) => {
+                if (element.closest('.detail-overlay')) return;
+
                 isDragging = true;
+                moved = false;
                 const rect = element.getBoundingClientRect();
-                offset.x = e.clientX - rect.left;
-                offset.y = e.clientY - rect.top;
-                
+                offset.x = event.clientX - rect.left;
+                offset.y = event.clientY - rect.top;
+
                 element.style.transition = 'none';
                 element.style.zIndex = 2000;
                 element.style.cursor = 'grabbing';
-                
-                function onMove(e) {
+
+                function onMove(moveEvent) {
                     if (!isDragging) return;
-                    element.style.left = (e.clientX - offset.x) + 'px';
-                    element.style.top = (e.clientY - offset.y) + 'px';
+                    moved = true;
+                    element.style.left = (moveEvent.clientX - offset.x) + 'px';
+                    element.style.top = (moveEvent.clientY - offset.y) + 'px';
                 }
-                
+
                 function onUp() {
                     isDragging = false;
                     element.style.transition = 'transform 0.2s ease';
                     element.style.zIndex = 100;
                     element.style.cursor = 'grab';
+                    if (moved && element.classList.contains('magnifier')) {
+                        uiState.ignoreNextMagnifierClick = true;
+                        setTimeout(() => { uiState.ignoreNextMagnifierClick = false; }, 80);
+                    }
                     document.removeEventListener('mousemove', onMove);
                     document.removeEventListener('mouseup', onUp);
                 }
-                
+
                 document.addEventListener('mousemove', onMove);
                 document.addEventListener('mouseup', onUp);
             });
         }
-        
-        // Initialize existing desk tools
+
         document.querySelectorAll('.desk-tool').forEach(makeDraggable);
-        
-        // === CAMERA SPAWN FUNCTION ===
-        function spawnCamera(e) {
-            const cam = document.createElement('div');
-            cam.className = 'desk-tool spawned-camera';
-            cam.style.cssText = `
+
+        const DetailView = (() => {
+            const overlay = document.getElementById('magnify-overlay');
+            const title = document.getElementById('detail-title');
+            const kicker = document.getElementById('detail-kicker');
+            const body = document.getElementById('detail-body');
+            const closeButtons = overlay ? overlay.querySelectorAll('.detail-close') : [];
+
+            function cloneVisual(target) {
+                const visual = target.querySelector('img, svg');
+                if (!visual) return '';
+                const clone = visual.cloneNode(true);
+                clone.removeAttribute('vid');
+                clone.removeAttribute('style');
+                return `<div class="detail-visual">${clone.outerHTML}</div>`;
+            }
+
+            function render(target) {
+                const note = target.dataset.detailNote || target.textContent.trim();
+                kicker.textContent = target.dataset.detailKicker || 'Field Detail';
+                title.textContent = target.dataset.detailTitle || target.getAttribute('alt') || 'Notebook Detail';
+                const visualMarkup = cloneVisual(target);
+                body.innerHTML = `${visualMarkup}<div class="detail-note">${note}</div>`;
+            }
+
+            function open(target) {
+                if (!overlay || !target) return;
+                render(target);
+                overlay.classList.add('is-open');
+                overlay.setAttribute('aria-hidden', 'false');
+            }
+
+            function close() {
+                if (!overlay) return;
+                overlay.classList.remove('is-open');
+                overlay.setAttribute('aria-hidden', 'true');
+            }
+
+            closeButtons.forEach((button) => button.addEventListener('click', close));
+            overlay?.addEventListener('click', (event) => {
+                if (event.target === overlay) close();
+            });
+
+            return { open, close };
+        })();
+
+        function placeSpawnedObject(element, event, offsetX, offsetY) {
+            element.style.left = (event.clientX - offsetX) + 'px';
+            element.style.top = (event.clientY - offsetY) + 'px';
+        }
+
+        function carrySpawnedObject(element, event, offsetX, offsetY) {
+            document.body.appendChild(element);
+            placeSpawnedObject(element, event, offsetX, offsetY);
+
+            function follow(moveEvent) {
+                placeSpawnedObject(element, moveEvent, offsetX, offsetY);
+            }
+
+            function drop() {
+                document.removeEventListener('mousemove', follow);
+                document.removeEventListener('mouseup', drop);
+                element.style.pointerEvents = 'auto';
+                element.style.cursor = 'grab';
+                element.style.zIndex = 100;
+                makeDraggable(element);
+            }
+
+            document.addEventListener('mousemove', follow);
+            document.addEventListener('mouseup', drop);
+        }
+
+        function spawnCamera(event) {
+            const uid = Date.now();
+            const camera = document.createElement('div');
+            camera.className = 'desk-tool spawned-camera';
+            camera.style.cssText = `
                 position: fixed;
-                left: ${e.clientX - 45}px;
-                top: ${e.clientY - 32}px;
                 width: 90px;
                 height: 65px;
                 z-index: 9999;
@@ -1517,171 +1732,62 @@ video {
                 pointer-events: none;
                 transform: rotate(${Math.random() * 10 - 5}deg);
             `;
-            
-            cam.innerHTML = `
+
+            camera.innerHTML = `
                 <svg width="90" height="65" viewBox="0 0 90 65" style="filter: drop-shadow(5px 8px 15px rgba(0,0,0,0.4));">
+                    <defs>
+                        <radialGradient id="lensGrad${uid}" cx="30%">
+                            <stop offset="0%" stop-color="#444"/>
+                            <stop offset="50%" stop-color="#1a1a1a"/>
+                            <stop offset="100%" stop-color="#000"/>
+                        </radialGradient>
+                    </defs>
                     <rect x="0" y="5" width="90" height="55" rx="8" fill="#262626"/>
                     <rect x="3" y="8" width="84" height="49" rx="6" fill="#333"/>
                     <rect x="0" y="5" width="90" height="20" rx="4" fill="#525252"/>
                     <circle cx="45" cy="40" r="20" fill="#1a1a1a"/>
                     <circle cx="45" cy="40" r="17" fill="#262626"/>
-                    <circle cx="45" cy="40" r="14" fill="url(#lensGrad${Date.now()})"/>
+                    <circle cx="45" cy="40" r="14" fill="url(#lensGrad${uid})"/>
                     <ellipse cx="40" cy="34" rx="5" ry="3" fill="rgba(255,255,255,0.3)" transform="rotate(-30 40 34)"/>
                     <circle cx="75" cy="12" r="5" fill="#dc2626"/>
                     <circle cx="75" cy="12" r="3" fill="#ef4444"/>
                     <rect x="35" y="2" width="25" height="5" rx="1" fill="#404040"/>
                     <rect x="8" y="10" width="18" height="12" rx="2" fill="#1a1a1a"/>
                     <rect x="10" y="12" width="14" height="8" rx="1" fill="#0a0a0a"/>
-                    <defs>
-                        <radialGradient id="lensGrad${Date.now()}" cx="30%">
-                            <stop offset="0%" stop-color="#444"/>
-                            <stop offset="50%" stop-color="#1a1a1a"/>
-                            <stop offset="100%" stop-color="#000"/>
-                        </radialGradient>
-                    </defs>
                 </svg>
             `;
-            
-            document.body.appendChild(cam);
-            
-            function moveCam(e) {
-                cam.style.left = (e.clientX - 45) + 'px';
-                cam.style.top = (e.clientY - 32) + 'px';
-            }
-            
-            document.addEventListener('mousemove', moveCam);
-            
-            function dropCam() {
-                document.removeEventListener('mousemove', moveCam);
-                document.removeEventListener('mouseup', dropCam);
-                cam.style.pointerEvents = 'auto';
-                cam.style.cursor = 'grab';
-                cam.style.zIndex = 100;
-                makeDraggable(cam);
-            }
-            
-            document.addEventListener('mouseup', dropCam);
+
+            carrySpawnedObject(camera, event, 45, 32);
         }
 
-        // === MAGNIFIER: Side panel picks up EXISTING desk magnifier ===
-        const magnifierBtn = document.querySelector('.magnifier-btn');
-        const deskMagnifier = document.querySelector('[vid="28"]');
-        let isCarryingMagnifier = false;
-        
-        if (magnifierBtn && deskMagnifier) {
-            magnifierBtn.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                isCarryingMagnifier = true;
-                
-                // Instantly teleport desk magnifier to cursor
-                deskMagnifier.style.transition = 'none';
-                deskMagnifier.style.position = 'fixed';
-                deskMagnifier.style.left = (e.clientX - 45) + 'px';
-                deskMagnifier.style.top = (e.clientY - 80) + 'px';
-                deskMagnifier.style.zIndex = 9999;
-                deskMagnifier.style.cursor = 'none';
-                deskMagnifier.style.pointerEvents = 'none';
-                
-                // Visual feedback
-                magnifierBtn.style.transform = 'scale(0.85)';
-                magnifierBtn.style.opacity = '0.7';
-                
-                function followCursor(e) {
-                    if (!isCarryingMagnifier) return;
-                    deskMagnifier.style.left = (e.clientX - 45) + 'px';
-                    deskMagnifier.style.top = (e.clientY - 80) + 'px';
-                }
-                
-                document.addEventListener('mousemove', followCursor);
-                
-                function release(e) {
-                    isCarryingMagnifier = false;
-                    document.removeEventListener('mousemove', followCursor);
-                    document.removeEventListener('mouseup', release);
-                    
-                    // Drop the magnifier at current position
-                    deskMagnifier.style.pointerEvents = 'auto';
-                    deskMagnifier.style.cursor = 'grab';
-                    deskMagnifier.style.zIndex = 100;
-                    deskMagnifier.style.transition = 'transform 0.2s ease';
-                    
-                    // Reset button
-                    magnifierBtn.style.transform = '';
-                    magnifierBtn.style.opacity = '';
-                }
-                
-                document.addEventListener('mouseup', release);
-            });
-            
-            // Also make clicking the desk magnifier itself work the same way
-            deskMagnifier.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                isCarryingMagnifier = true;
-                
-                deskMagnifier.style.transition = 'none';
-                deskMagnifier.style.position = 'fixed';
-                deskMagnifier.style.zIndex = 9999;
-                deskMagnifier.style.cursor = 'none';
-                deskMagnifier.style.pointerEvents = 'none';
-                
-                function followCursor(e) {
-                    if (!isCarryingMagnifier) return;
-                    deskMagnifier.style.left = (e.clientX - 45) + 'px';
-                    deskMagnifier.style.top = (e.clientY - 80) + 'px';
-                }
-                
-                document.addEventListener('mousemove', followCursor);
-                
-                function release() {
-                    isCarryingMagnifier = false;
-                    document.removeEventListener('mousemove', followCursor);
-                    document.removeEventListener('mouseup', release);
-                    
-                    deskMagnifier.style.pointerEvents = 'auto';
-                    deskMagnifier.style.cursor = 'grab';
-                    deskMagnifier.style.zIndex = 100;
-                    deskMagnifier.style.transition = 'transform 0.2s ease';
-                }
-                
-                document.addEventListener('mouseup', release);
-            });
-        }
-        
-        // === CAMERA BUTTON: Spawns new camera ===
-        const cameraBtn = document.querySelector('.camera-btn');
-        if (cameraBtn) {
-            cameraBtn.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Button feedback
-                cameraBtn.style.transform = 'scale(0.85)';
-                cameraBtn.style.opacity = '0.7';
-                
-                spawnCamera(e);
-                
-                // Reset button after brief delay
-                setTimeout(() => {
-                    cameraBtn.style.transform = '';
-                    cameraBtn.style.opacity = '';
-                }, 200);
-            });
-        }
-        
-        // === TAPE PILE: Spawns ONE new tape at cursor ===
-        const tapePile = document.querySelector('[vid="162"]');
-        
-        function spawnTape(e) {
-            const newTape = document.createElement('div');
-            newTape.className = 'desk-tool spawned-tape';
-            newTape.style.cssText = `
+        function spawnSticker(event) {
+            const sticker = document.createElement('button');
+            sticker.type = 'button';
+            sticker.className = 'desk-tool spawned-sticker detail-target';
+            sticker.dataset.detailType = 'note';
+            sticker.dataset.detailKicker = 'Sticker Maker';
+            sticker.dataset.detailTitle = 'Fresh field sticker';
+            sticker.dataset.detailNote = 'A spawned sticker can mark notebook content and still use the same detail-view system.';
+            sticker.textContent = '✿';
+            sticker.style.cssText = `
                 position: fixed;
-                left: ${e.clientX - 60}px;
-                top: ${e.clientY - 15}px;
+                width: 86px;
+                height: 74px;
+                z-index: 9999;
+                cursor: none;
+                pointer-events: none;
+                transform: rotate(${Math.random() * 18 - 9}deg);
+            `;
+            wireDetailTarget(sticker);
+            carrySpawnedObject(sticker, event, 43, 37);
+        }
+
+        function spawnTape(event) {
+            const uid = Date.now();
+            const tape = document.createElement('div');
+            tape.className = 'desk-tool spawned-tape';
+            tape.style.cssText = `
+                position: fixed;
                 width: 120px;
                 height: 30px;
                 z-index: 9999;
@@ -1689,230 +1795,150 @@ video {
                 pointer-events: none;
                 transform: rotate(${Math.random() * 10 - 5}deg);
             `;
-            
-            const uid = Date.now();
-            newTape.innerHTML = `
+
+            tape.innerHTML = `
                 <svg width="120" height="30" style="filter: drop-shadow(2px 3px 6px rgba(0,0,0,0.2));">
                     <defs>
                         <pattern id="tp${uid}" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
                             <circle cx="7" cy="7" r="2.5" fill="white" opacity="0.5"/>
                         </pattern>
                     </defs>
-                    <rect x="0" y="0" width="120" height="30" rx="2" fill="rgba(186, 107, 93, 0.75)"/>
-                    <rect x="0" y="0" width="120" height="30" rx="2" fill="url(#tp${uid})" opacity="0.3"/>
+                    <rect x="0" y="0" width="120" height="30" rx="8" fill="rgba(186, 107, 93, 0.75)"/>
+                    <rect x="0" y="0" width="120" height="30" rx="8" fill="url(#tp${uid})" opacity="0.3"/>
                 </svg>
             `;
-            
-            document.body.appendChild(newTape);
-            
-            function follow(e) {
-                newTape.style.left = (e.clientX - 60) + 'px';
-                newTape.style.top = (e.clientY - 15) + 'px';
-            }
-            
-            document.addEventListener('mousemove', follow);
-            
-            function drop() {
-                document.removeEventListener('mousemove', follow);
-                document.removeEventListener('mouseup', drop);
-                newTape.style.pointerEvents = 'auto';
-                newTape.style.cursor = 'grab';
-                newTape.style.zIndex = 100;
-                makeDraggable(newTape);
-            }
-            
-            document.addEventListener('mouseup', drop);
+
+            carrySpawnedObject(tape, event, 60, 15);
         }
-        
-        if (tapePile) {
-            tapePile.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                spawnTape(e);
-            });
-        }
-        
-        // === PAPERCLIP PILE: Spawns ONE new clip at cursor ===
-        const clipPile = document.querySelector('[vid="121"]');
-        
-        function spawnClip(e) {
-            const newClip = document.createElement('div');
-            newClip.className = 'desk-tool spawned-clip';
-            newClip.style.cssText = `
+
+        function spawnSticky(event) {
+            const sticky = document.createElement('div');
+            sticky.className = 'desk-tool spawned-sticky detail-target';
+            sticky.dataset.detailKicker = 'Sticky Note';
+            sticky.dataset.detailTitle = 'New note';
+            sticky.dataset.detailNote = 'A quick handwritten note spawned from the stationery pile.';
+            sticky.style.cssText = `
                 position: fixed;
-                left: ${e.clientX - 25}px;
-                top: ${e.clientY - 40}px;
-                width: 50px;
-                height: 80px;
-                z-index: 9999;
-                cursor: none;
-                pointer-events: none;
-                transform: rotate(${Math.random() * 30 - 15}deg);
-            `;
-            
-            const uid = Date.now();
-            newClip.innerHTML = `
-                <svg width="50" height="80" style="filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));">
-                    <defs>
-                        <linearGradient id="cm${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#d1d5db"/>
-                            <stop offset="50%" stop-color="#f3f4f6"/>
-                            <stop offset="100%" stop-color="#9ca3af"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M15 15 L15 55 Q15 65 25 65 Q35 65 35 55 L35 20" 
-                          stroke="url(#cm${uid})" stroke-width="4" fill="none" 
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19 22 L19 50 Q19 58 25 58 Q31 58 31 50 L31 25" 
-                          stroke="#9ca3af" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                </svg>
-            `;
-            
-            document.body.appendChild(newClip);
-            
-            function follow(e) {
-                newClip.style.left = (e.clientX - 25) + 'px';
-                newClip.style.top = (e.clientY - 40) + 'px';
-            }
-            
-            document.addEventListener('mousemove', follow);
-            
-            function drop() {
-                document.removeEventListener('mousemove', follow);
-                document.removeEventListener('mouseup', drop);
-                newClip.style.pointerEvents = 'auto';
-                newClip.style.cursor = 'grab';
-                newClip.style.zIndex = 100;
-                makeDraggable(newClip);
-            }
-            
-            document.addEventListener('mouseup', drop);
-        }
-        
-        if (clipPile) {
-            clipPile.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                spawnClip(e);
-            });
-        }
-        
-        // === STICKY PILE: Spawns ONE new note at cursor ===
-        const stickyPile = document.querySelector('[vid="176"]');
-        
-        function spawnSticky(e) {
-            const newSticky = document.createElement('div');
-            newSticky.className = 'desk-tool spawned-sticky';
-            newSticky.style.cssText = `
-                position: fixed;
-                left: ${e.clientX - 60}px;
-                top: ${e.clientY - 45}px;
                 width: 120px;
                 height: 90px;
                 z-index: 9999;
                 cursor: none;
                 pointer-events: none;
                 background: #fef08a;
-                border-radius: 4px;
+                border-radius: 16px 12px 18px 10px;
                 box-shadow: 3px 5px 10px rgba(0,0,0,0.25);
                 transform: rotate(${Math.random() * 10 - 5}deg);
                 padding: 10px;
                 font-family: 'Caveat', cursive;
-                font-size: 14px;
+                font-size: 18px;
                 color: #854d0e;
                 display: flex;
                 align-items: center;
                 justify-content: center;
             `;
-            newSticky.textContent = 'New note';
-            
-            document.body.appendChild(newSticky);
-            
-            function follow(e) {
-                newSticky.style.left = (e.clientX - 60) + 'px';
-                newSticky.style.top = (e.clientY - 45) + 'px';
-            }
-            
-            document.addEventListener('mousemove', follow);
-            
-            function drop() {
-                document.removeEventListener('mousemove', follow);
-                document.removeEventListener('mouseup', drop);
-                newSticky.style.pointerEvents = 'auto';
-                newSticky.style.cursor = 'grab';
-                newSticky.style.zIndex = 100;
-                makeDraggable(newSticky);
-            }
-            
-            document.addEventListener('mouseup', drop);
+            sticky.textContent = 'New note';
+            wireDetailTarget(sticky);
+            carrySpawnedObject(sticky, event, 60, 45);
         }
-        
-        if (stickyPile) {
-            stickyPile.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                spawnSticky(e);
-            });
+
+        function setMagnifierMode(active) {
+            uiState.magnifierMode = active;
+            document.body.classList.toggle('magnifier-mode', active);
+            document.querySelector('.magnifier-btn')?.classList.toggle('active', active);
         }
-        
-        // === SIDE PANEL: Paperclip button spawns new clip ===
-        const clipBtn = document.querySelector('.clip-btn');
-        if (clipBtn) {
-            clipBtn.addEventListener('mousedown', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Button feedback
-                clipBtn.style.transform = 'scale(0.85)';
-                clipBtn.style.opacity = '0.7';
-                
-                spawnClip(e);
-                
-                // Reset button
-                setTimeout(() => {
-                    clipBtn.style.transform = '';
-                    clipBtn.style.opacity = '';
-                }, 200);
-            });
-        }
-        
-        // === DETAIL VIEW ===
-        const magnifierDeskTool = document.querySelector('[vid="28"]');
-        const magnifyOverlay = document.getElementById('magnify-overlay');
-        const closeMagnifyBtn = document.getElementById('close-magnify');
-        
-        if (magnifierDeskTool && magnifyOverlay) {
-            magnifierDeskTool.addEventListener('click', () => {
-                magnifyOverlay.style.display = 'block';
-                magnifyOverlay.style.opacity = '0';
-                setTimeout(() => magnifyOverlay.style.opacity = '1', 10);
-            });
-        }
-        
-        if (closeMagnifyBtn && magnifyOverlay) {
-            closeMagnifyBtn.addEventListener('click', () => {
-                magnifyOverlay.style.opacity = '0';
-                setTimeout(() => magnifyOverlay.style.display = 'none', 300);
-            });
-        }
-        
-        if (magnifyOverlay) {
-            magnifyOverlay.addEventListener('click', (e) => {
-                if (e.target === magnifyOverlay) {
-                    magnifyOverlay.style.opacity = '0';
-                    setTimeout(() => magnifyOverlay.style.display = 'none', 300);
+
+        function wireDetailTarget(target) {
+            target.addEventListener('click', (event) => {
+                if (target.classList.contains('page-sticker') || target.classList.contains('spawned-sticker') || target.classList.contains('spawned-sticky') || uiState.magnifierMode) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    DetailView.open(target);
+                    setMagnifierMode(false);
                 }
             });
+
+            target.addEventListener('dblclick', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                DetailView.open(target);
+            });
         }
-        
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && magnifyOverlay && magnifyOverlay.style.display === 'block') {
-                magnifyOverlay.style.opacity = '0';
-                setTimeout(() => magnifyOverlay.style.display = 'none', 300);
+
+        document.querySelectorAll('.detail-target').forEach(wireDetailTarget);
+
+        const toolSystem = {
+            objectSpawn: {
+                camera: spawnCamera,
+                sticker: spawnSticker,
+                tape: spawnTape,
+                sticky: spawnSticky
+            },
+            viewMode: {
+                notebook: () => setMagnifierMode(false),
+                magnifier: () => setMagnifierMode(!uiState.magnifierMode),
+                archive: () => setMagnifierMode(false)
+            }
+        };
+
+        document.querySelectorAll('[data-tool-kind="object-spawn"]').forEach((button) => {
+            button.addEventListener('mousedown', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                button.style.transform = 'scale(0.85)';
+                button.style.opacity = '0.7';
+                toolSystem.objectSpawn[button.dataset.tool]?.(event);
+                setTimeout(() => {
+                    button.style.transform = '';
+                    button.style.opacity = '';
+                }, 200);
+            });
+        });
+
+        document.querySelectorAll('[data-tool-kind="view-mode"]').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                document.querySelectorAll('[data-tool-kind="view-mode"]').forEach((item) => item.classList.remove('active'));
+                button.classList.add('active');
+                toolSystem.viewMode[button.dataset.tool]?.();
+            });
+        });
+
+        const tapePile = document.querySelector('[vid="162"]');
+        const stickyPile = document.querySelector('[vid="176"]');
+        tapePile?.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            spawnTape(event);
+        });
+        stickyPile?.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            spawnSticky(event);
+        });
+
+        const deskMagnifier = document.querySelector('.desk-tool.magnifier');
+        deskMagnifier?.addEventListener('click', (event) => {
+            if (uiState.ignoreNextMagnifierClick) return;
+            event.preventDefault();
+            event.stopPropagation();
+            const defaultTarget = document.querySelector('.sketch-container.detail-target') || document.querySelector('.detail-target');
+            DetailView.open(defaultTarget);
+        });
+
+        const glass = document.getElementById('glass');
+        document.addEventListener('mousemove', (event) => {
+            if (!glass || !uiState.magnifierMode) return;
+            glass.style.left = (event.clientX - 80) + 'px';
+            glass.style.top = (event.clientY - 80) + 'px';
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                DetailView.close();
+                setMagnifierMode(false);
             }
         });
-        
-
     </script>
 
 </body></html>
