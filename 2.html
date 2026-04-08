@@ -1,0 +1,543 @@
+
+<html lang="en" vid="0"><head vid="1">
+    <meta charset="UTF-8" vid="2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3">
+    <title vid="4">NATURA — Field Notebook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" vid="5">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" vid="6">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@400;700&amp;family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Reenie+Beanie&amp;display=swap" rel="stylesheet" vid="7">
+    <style vid="8">
+        :root {
+            --desk-wood: #2A1D15;
+            --notebook-yellow: #FFC857;
+            --paper-ivory: #FDFBF7;
+            --grid-line: rgba(0, 0, 0, 0.05);
+            --ink: #2C3E50;
+            --pencil: #5D5D5D;
+            --accent-green: #6B705C;
+            --shadow-soft: rgba(0, 0, 0, 0.15);
+            --shadow-hard: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background: var(--desk-wood);
+            background-image: 
+                linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+                url('https://images.unsplash.com/photo-1544208062-81768832a762?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            cursor: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI4IiBjeT0iOCIgcj0iNyIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+"), auto;
+        }
+
+        
+        .workspace {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 2000px;
+        }
+
+        
+        .tool {
+            position: absolute;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(4px 8px 12px var(--shadow-hard));
+            cursor: grab;
+            z-index: 10;
+        }
+        .tool:active { cursor: grabbing; }
+
+        .ruler {
+            bottom: 10%;
+            left: 5%;
+            width: 400px;
+            height: 50px;
+            background: #E9C46A;
+            border-radius: 4px;
+            transform: rotate(-15deg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .ruler::after {
+            content: '';
+            width: 100%;
+            height: 10px;
+            background-image: repeating-linear-gradient(90deg, #000, #000 1px, transparent 1px, transparent 10px);
+            opacity: 0.3;
+        }
+
+        .pencil-box {
+            top: 10%;
+            right: 5%;
+            width: 80px;
+            height: 200px;
+            background: #B07D62;
+            border-radius: 8px;
+            transform: rotate(5deg);
+        }
+
+        .magnifier {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 12px solid #555;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(2px) brightness(1.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 20%;
+            left: 10%;
+            box-shadow: 
+                inset 0 0 40px rgba(255,255,255,0.4),
+                0 20px 40px rgba(0,0,0,0.4);
+        }
+        .magnifier::before {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 12px;
+            background: #333;
+            bottom: -80px;
+            transform: rotate(45deg);
+            border-radius: 4px;
+        }
+
+        
+        .notebook-container {
+            width: 1100px;
+            height: 750px;
+            background: var(--notebook-yellow);
+            border-radius: 20px 40px 40px 20px;
+            box-shadow: 
+                -20px 30px 60px rgba(0,0,0,0.5),
+                inset 10px 0 20px rgba(0,0,0,0.2);
+            padding: 10px;
+            display: flex;
+            position: relative;
+            transform: rotateX(10deg) rotateY(-2deg);
+        }
+
+        
+        .tabs {
+            position: absolute;
+            right: -40px;
+            top: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .tab {
+            width: 60px;
+            height: 100px;
+            border-radius: 0 12px 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 4px 2px 8px rgba(0,0,0,0.2);
+        }
+        .tab:hover { transform: translateX(5px); }
+        .tab.green { background: #6B705C; }
+        .tab.blue { background: #457B9D; }
+        .tab.red { background: #B07D62; }
+
+        .pages {
+            flex: 1;
+            background: var(--paper-ivory);
+            border-radius: 12px;
+            display: flex;
+            overflow: hidden;
+            box-shadow: inset 0 0 2px rgba(0,0,0,0.2);
+        }
+
+        .spine {
+            width: 2px;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            z-index: 5;
+        }
+
+        .page {
+            flex: 1;
+            padding: 40px;
+            position: relative;
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 25px 25px;
+            overflow-y: auto;
+        }
+
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 10px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: var(--ink);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .metadata {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--pencil);
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        
+        .specimen-card {
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .specimen-image {
+            width: 100%;
+            height: 300px;
+            background: #f9f9f9;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        
+        .butterfly-3d {
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(10px 20px 20px rgba(0,0,0,0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-15px) rotate(-2deg); }
+        }
+
+        .polaroid {
+            width: 220px;
+            background: white;
+            padding: 12px 12px 40px 12px;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            position: absolute;
+            top: 150px;
+            right: 40px;
+            z-index: 2;
+        }
+        .polaroid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            filter: sepia(0.3) contrast(1.1);
+        }
+
+        
+        .washi-tape {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            background: rgba(107, 112, 92, 0.6);
+            backdrop-filter: blur(1px);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            clip-path: polygon(0% 10%, 5% 0%, 95% 0%, 100% 15%, 100% 85%, 95% 100%, 5% 100%, 0% 90%);
+        }
+
+        .handwriting {
+            font-family: 'Reenie Beanie', cursive;
+            font-size: 24px;
+            color: #2c4a70;
+            line-height: 1.2;
+            margin-top: 15px;
+        }
+
+        .caption {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--pencil);
+            margin-top: 10px;
+            display: block;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            padding: 15px;
+            border: 1px dashed var(--pencil);
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: var(--pencil);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        
+        .toolbar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 100;
+        }
+
+        .tool-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--ink);
+        }
+        .tool-btn:hover {
+            background: var(--notebook-yellow);
+            transform: translateY(-2px);
+        }
+
+        .verified-stamp {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            width: 100px;
+            height: 100px;
+            border: 3px double rgba(176, 125, 98, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: rgba(176, 125, 98, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        
+        .page::-webkit-scrollbar { width: 6px; }
+        .page::-webkit-scrollbar-track { background: transparent; }
+        .page::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+
+    </style>
+</head>
+<body vid="9">
+
+    <div class="workspace" vid="10">
+        
+        
+        <div class="tool ruler" style="transform: rotate(-15deg); bottom: 15%; left: 5%;" vid="11"></div>
+        <div class="tool magnifier" id="magnifier" vid="12"></div>
+        <div class="tool pencil-box" vid="13"></div>
+
+        
+        <div class="notebook-container" vid="14">
+            <div class="tabs" vid="15">
+                <div class="tab green" vid="16">Flora</div>
+                <div class="tab blue" vid="17">Fauna</div>
+                <div class="tab red" vid="18">Fungi</div>
+            </div>
+
+            <div class="pages" vid="19">
+                
+                <div class="page" vid="20">
+                    <div class="header" vid="21">
+                        <div class="logo" vid="22">NATURA</div>
+                        <div class="metadata" vid="23">
+                            VOL. IV / ARCHIVE 2024<br vid="24">
+                            COORD: 45.4215° N, 75.6972° W<br vid="25">
+                            TEMP: 22°C / HUMID: 64%
+                        </div>
+                    </div>
+
+                    <div class="specimen-card" vid="26">
+                        <div class="washi-tape" vid="27"></div>
+                        <div class="specimen-image" vid="28">
+                            
+                            <svg class="butterfly-3d" viewBox="0 0 200 200" vid="29">
+                                <defs vid="30">
+                                    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%" vid="31">
+                                        <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" vid="32"></stop>
+                                        <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" vid="33"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M100 100 C140 20 180 40 180 80 C180 120 140 140 100 100" fill="url(#wingGrad)" opacity="0.8" vid="34">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="20 100 100" dur="0.2s" repeatCount="indefinite" vid="35"></animateTransform>
+                                </path>
+                                <path d="M100 100 C60 20 20 40 20 80 C20 120 60 140 100 100" fill="url(#wingGrad)" opacity="0.8" vid="36">
+                                    <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="-20 100 100" dur="0.2s" repeatCount="indefinite" vid="37"></animateTransform>
+                                </path>
+                                <rect x="98" y="70" width="4" height="60" rx="2" fill="#333" vid="38"></rect>
+                            </svg>
+                        </div>
+                        <span class="caption" vid="39">#SPEC-084: Danaus plexippus</span>
+                        <div class="handwriting" vid="40">
+                            Noticed a strange wing pattern variation in this specimen. Seems to be thriving near the milkweed cluster by the creek.
+                        </div>
+                    </div>
+
+                    <div class="stat-grid" vid="41">
+                        <div class="stat-item" vid="42">
+                            <span class="stat-label" vid="43">WINGSPAN</span>
+                            <div class="stat-value" vid="44">9.4 cm</div>
+                        </div>
+                        <div class="stat-item" vid="45">
+                            <span class="stat-label" vid="46">VITALITY SCORE</span>
+                            <div class="stat-value" vid="47">Optimal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spine" vid="48"></div>
+
+                
+                <div class="page" vid="49">
+                    <div class="polaroid" style="top: 60px; left: 40px;" vid="50">
+                        <img src="https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" alt="Forest View" vid="51">
+                        <div class="handwriting" style="font-size: 16px; margin-top: 10px;" vid="52">The observation site.</div>
+                    </div>
+
+                    <div style="margin-top: 320px;" vid="53">
+                        <h2 style="font-family: 'Playfair Display'; font-size: 28px; margin-bottom: 10px;" vid="54">Observation Notes</h2>
+                        <p style="color: var(--pencil); font-size: 14px; line-height: 1.6;" vid="55">
+                            The migration patterns are shifting earlier this season. Preliminary data suggests a 4-day advance compared to the 2023 record. 
+                        </p>
+                        <br vid="56">
+                        <div style="display: flex; gap: 8px;" vid="57">
+                            <div style="width: 20px; height: 20px; border-radius: 50%; background: #FFC857;" vid="58"></div>
+                            <div style="width: 20px; height: 20px; border-radius: 50%; background: #B07D62;" vid="59"></div>
+                            <div style="width: 20px; height: 20px; border-radius: 50%; background: #6B705C;" vid="60"></div>
+                            <span class="caption" style="margin: 0; line-height: 20px;" vid="61">PIGMENT SAMPLES</span>
+                        </div>
+                    </div>
+
+                    <div class="verified-stamp" vid="62">
+                        VERIFIED<br vid="63">FIELD<br vid="64">DATA
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="toolbar" vid="65">
+                <div class="tool-btn" vid="66">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="67"><path d="M12 19l7-7 3 3-7 7-3-3z" vid="68"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" vid="69"></path><path d="M2 2l5 5" vid="70"></path></svg>
+                </div>
+                <div class="tool-btn" vid="71">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="72"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.8.9" vid="73"></path><path d="M12 8l4 4-4 4" vid="74"></path></svg>
+                </div>
+                <div class="tool-btn" vid="75">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="76"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" vid="77"></rect><circle cx="8.5" cy="8.5" r="1.5" vid="78"></circle><polyline points="21 15 16 10 5 21" vid="79"></polyline></svg>
+                </div>
+                <div class="tool-btn" style="background: var(--ink); color: white;" vid="80">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" vid="81"><line x1="12" y1="5" x2="12" y2="19" vid="82"></line><line x1="5" y1="12" x2="19" y2="12" vid="83"></line></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script vid="84">
+        const magnifier = document.getElementById('magnifier');
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        magnifier.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = magnifier.offsetLeft;
+            initialTop = magnifier.offsetTop;
+            magnifier.style.transition = 'none';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+            magnifier.style.left = `${initialLeft + dx}px`;
+            magnifier.style.top = `${initialTop + dy}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            magnifier.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+
+        
+        const notebook = document.querySelector('.notebook-container');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            notebook.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis + 10}deg)`;
+        });
+    </script>
+
+</body></html>
