@@ -1172,7 +1172,7 @@ video {
         <span vid="11">01</span><span vid="12">02</span><span vid="13">03</span><span vid="14">04</span><span vid="15">05</span><span vid="16">06</span><span vid="17">07</span><span vid="18">08</span><span vid="19">09</span><span vid="20">10</span><span vid="21">11</span><span vid="22">12</span><span vid="23">13</span><span vid="24">14</span><span vid="25">15</span>
     </div>
     
-    <div class="desk-tool pencil" style="top: 150px; right: 50px;" vid="26"></div>
+    <div class="desk-tool pencil" data-action="notebook.draw" style="top: 150px; right: 50px;" vid="26" title="Draw mode"></div>
 
     <!-- MAGNIFYING GLASS DESK TOOL -->
     <div class="desk-tool magnifier" style="top: 80px; left: 300px; width: 90px; height: 160px; transform: rotate(-15deg); cursor: pointer;" vid="27" title="Magnify View - Click to zoom in on specific area">
@@ -1189,7 +1189,7 @@ video {
     </div>
 
     <!-- PEN TOOL - Detailed -->
-    <div class="desk-tool" style="top: 160px; right: 60px; width: 140px; height: 20px; transform: rotate(12deg);" vid="34" title="Pen Tool">
+    <div class="desk-tool" data-action="notebook.write" style="top: 160px; right: 60px; width: 140px; height: 20px; transform: rotate(12deg);" vid="34" title="Pen Tool">
         <svg width="140" height="20" viewBox="0 0 140 20" style="filter: drop-shadow(3px 5px 10px rgba(0,0,0,0.3));" vid="35">
             <!-- Pen barrel -->
             <rect x="20" y="4" width="100" height="12" rx="2" fill="#1a1a1a" vid="36"></rect>
@@ -1206,7 +1206,7 @@ video {
     </div>
 
     <!-- PENCIL TOOL - Detailed HB with wood texture -->
-    <div class="desk-tool" style="top: 200px; right: 40px; width: 180px; height: 24px; transform: rotate(-8deg);" vid="43" title="HB Pencil - Drawing Mode">
+    <div class="desk-tool" data-action="notebook.draw" style="top: 200px; right: 40px; width: 180px; height: 24px; transform: rotate(-8deg);" vid="43" title="HB Pencil - Drawing Mode">
         <svg width="180" height="24" viewBox="0 0 180 24" style="filter: drop-shadow(3px 5px 10px rgba(0,0,0,0.3));" vid="44">
             <!-- Wooden barrel with hex shape effect -->
             <rect x="20" y="3" width="120" height="18" rx="2" fill="#d4a86a" vid="45"></rect>
@@ -1276,7 +1276,7 @@ video {
     </div>
 
     <!-- ERASER - Detailed Block Eraser -->
-    <div class="desk-tool" style="bottom: 180px; right: 160px; width: 75px; height: 32px; transform: rotate(45deg);" vid="93" title="Eraser">
+    <div class="desk-tool" data-action="notebook.erase" style="bottom: 180px; right: 160px; width: 75px; height: 32px; transform: rotate(45deg);" vid="93" title="Eraser">
         <svg width="75" height="32" viewBox="0 0 75 32" style="filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.3));" vid="94">
             <!-- Paper wrapper -->
             <rect x="0" y="0" width="75" height="32" rx="3" fill="#f8fafc" vid="95"></rect>
@@ -1294,7 +1294,7 @@ video {
     </div>
 
     <!-- HIGHLIGHTER - Detailed Marker -->
-    <div class="desk-tool" style="top: 380px; left: 120px; width: 120px; height: 24px; transform: rotate(-30deg);" vid="102" title="Highlighter">
+    <div class="desk-tool" data-action="notebook.annotate" style="top: 380px; left: 120px; width: 120px; height: 24px; transform: rotate(-30deg);" vid="102" title="Highlighter">
         <svg width="120" height="24" viewBox="0 0 120 24" style="filter: drop-shadow(3px 5px 10px rgba(0,0,0,0.3));" vid="103">
             <!-- Cap with clip -->
             <rect x="0" y="3" width="30" height="18" rx="2" fill="#fef08a" vid="104"></rect>
@@ -1328,7 +1328,7 @@ video {
     </div>
 
     <!-- DECORATIVE PAPERCLIP PILE - desk stationery only; side attachment tool is replaced by sticker maker -->
-    <div class="desk-tool paperclip-pile" style="bottom: 90px; left: 60px; width: 120px; height: 100px;" vid="120" title="Decorative paperclip pile">
+    <div class="desk-tool paperclip-pile" data-action="scrapbook.addClip" style="bottom: 90px; left: 60px; width: 120px; height: 100px;" vid="120" title="Decorative paperclip pile">
         <svg width="120" height="100" viewBox="0 0 120 100" style="filter: drop-shadow(3px 6px 10px rgba(0,0,0,0.35));" vid="121">
             <defs vid="122">
                 <linearGradient id="clipSilver" x1="0%" y1="0%" x2="100%" y2="100%" vid="123">
@@ -1354,7 +1354,7 @@ video {
     </div>
 
     <!-- BINDER CLIP - Detailed -->
-    <div class="desk-tool" style="top: 60px; right: 220px; width: 70px; height: 55px;" vid="135" title="Binder Clip - Group pages">
+    <div class="desk-tool" data-action="scrapbook.addClip" style="top: 60px; right: 220px; width: 70px; height: 55px;" vid="135" title="Binder Clip - Group pages">
         <svg width="70" height="55" viewBox="0 0 70 55" style="filter: drop-shadow(4px 6px 10px rgba(0,0,0,0.35));" vid="136">
             <!-- Wire handles up position -->
             <ellipse cx="20" cy="15" rx="6" ry="12" fill="none" stroke="#6b7280" stroke-width="3" vid="137"></ellipse>
@@ -1368,7 +1368,7 @@ video {
     </div>
 
     <!-- CAMERA - Detailed Vintage Style -->
-    <div class="desk-tool" style="top: 320px; right: 90px; width: 95px; height: 65px; transform: rotate(-15deg);" vid="142" title="Capture Photo">
+    <div class="desk-tool" data-action="capture.openCamera" style="top: 320px; right: 90px; width: 95px; height: 65px; transform: rotate(-15deg);" vid="142" title="Capture Photo">
         <svg width="95" height="65" viewBox="0 0 95 65" style="filter: drop-shadow(5px 8px 15px rgba(0,0,0,0.4));" vid="143">
             <!-- Camera body leather texture -->
             <rect x="0" y="5" width="95" height="55" rx="8" fill="#262626" vid="144"></rect>
@@ -1401,7 +1401,7 @@ video {
     </div>
 
     <!-- MESSY WASHI TAPE PILE - Crumpled strips -->
-    <div class="desk-tool washi-pile" style="top: 250px; left: 40px; width: 160px; height: 100px; cursor: pointer;" vid="161" title="Tape pile - Click side panel to pick up a strip">
+    <div class="desk-tool washi-pile" data-action="scrapbook.addTape" style="top: 250px; left: 40px; width: 160px; height: 100px; cursor: pointer;" vid="161" title="Tape pile - Click side panel to pick up a strip">
         <svg width="160" height="100" viewBox="0 0 160 100" style="filter: drop-shadow(4px 6px 12px rgba(0,0,0,0.3));" vid="162">
             <defs vid="163">
                 <pattern id="dotPatternRed" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse" vid="164">
@@ -1427,7 +1427,7 @@ video {
     </div>
 
     <!-- MESSY STICKY NOTE PILE - Scattered and overlapping -->
-    <div class="desk-tool sticky-pile" style="bottom: 40px; left: 240px; width: 180px; height: 160px; cursor: pointer;" vid="175" title="Sticky note pile - Click side panel to pick up one">
+    <div class="desk-tool sticky-pile" data-action="scrapbook.addLabel" style="bottom: 40px; left: 240px; width: 180px; height: 160px; cursor: pointer;" vid="175" title="Sticky note pile - Click side panel to pick up one">
         <svg width="180" height="160" viewBox="0 0 180 160" style="filter: drop-shadow(5px 8px 15px rgba(0,0,0,0.3));" vid="176">
             <!-- Bottom note - partially hidden -->
             <rect x="15" y="50" width="110" height="90" rx="3" fill="#fde047" transform="rotate(8 70 95)" opacity="0.7" vid="177"></rect>
@@ -1469,9 +1469,9 @@ video {
     <div class="magnifying-glass" id="glass" vid="224"></div>
     
     <nav class="side-nav" aria-label="Notebook tools" vid="224">
-        <div class="tool-group" data-tool-group="object-spawn" vid="225">
-        <span class="tool-group-label" vid="226">Spawn</span>
-        <div class="nav-tool-btn camera-btn" data-tool-kind="object-spawn" data-tool="camera" style="width: 70px; height: 70px; background: linear-gradient(135deg, #eac87b, #d4b483); border: 2px solid #8b6914;" title="Camera Action" vid="227">
+        <div class="tool-group" data-tool-group="capture-actions" vid="225">
+        <span class="tool-group-label" vid="226">Capture</span>
+        <div class="nav-tool-btn camera-btn" data-tool-kind="button-action" data-action="capture.openCamera" style="width: 70px; height: 70px; background: linear-gradient(135deg, #eac87b, #d4b483); border: 2px solid #8b6914;" title="Camera Action" vid="227">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 32px; height: 32px;" vid="226">
                 <rect x="3" y="6" width="18" height="12" rx="2" vid="228"></rect>
                 <circle cx="12" cy="12" r="3" vid="229"></circle>
@@ -1480,7 +1480,26 @@ video {
             </svg>
         </div>
 
-        <div class="nav-tool-btn sticker-btn" data-tool-kind="object-spawn" data-tool="sticker" title="Sticker Maker" vid="243">
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="capture.importImage" title="Import Image" vid="242a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="242b">
+                <rect x="4" y="5" width="16" height="14" rx="2" vid="242c"></rect>
+                <path d="M8 14l2.5-2.5L14 15l2-2 3 3" vid="242d"></path>
+                <circle cx="9" cy="9" r="1.2" vid="242e"></circle>
+            </svg>
+        </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="capture.convertToSketch" title="Convert Image to Sketch" vid="242f">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="242g">
+                <path d="M4 18c5-8 9 2 16-8" vid="242h"></path>
+                <path d="M4 7h16" vid="242i"></path>
+                <path d="M7 21l10-18" vid="242j"></path>
+            </svg>
+        </div>
+        </div>
+
+        <div class="tool-group" data-tool-group="scrapbook-actions" vid="242k">
+        <span class="tool-group-label" vid="242l">Scrap</span>
+        <div class="nav-tool-btn sticker-btn" data-tool-kind="button-action" data-action="scrapbook.addSticker" title="Sticker Maker" vid="243">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="244">
                 <path d="M5 4h10l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" vid="245"></path>
                 <path d="M15 4v5h5" vid="246"></path>
@@ -1488,12 +1507,63 @@ video {
                 <path d="M8 16h6" vid="248"></path>
             </svg>
         </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="scrapbook.addTape" title="Add Tape" vid="248a">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="248b">
+                <path d="M4 10c4-2 7 2 10 0s4-2 6-1v5c-3-1-5 0-7 1s-5-2-9 0z" vid="248c"></path>
+            </svg>
+        </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="scrapbook.addLabel" title="Add Label" vid="248d">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="248e">
+                <path d="M4 7h16v10H4z" vid="248f"></path>
+                <path d="M8 11h8" vid="248g"></path>
+                <path d="M8 14h5" vid="248h"></path>
+            </svg>
+        </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="scrapbook.addClip" title="Add Clip" vid="248i">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="248j">
+                <path d="M16 6v10a4 4 0 0 1-8 0V7a3 3 0 0 1 6 0v9a2 2 0 0 1-4 0V8" vid="248k"></path>
+            </svg>
+        </div>
         </div>
         
-        <div class="tool-group" data-tool-group="view-mode" vid="249">
-        <span class="tool-group-label" vid="250">View</span>
-        <div class="nav-tool-btn notebook-btn active" data-tool-kind="view-mode" data-tool="notebook" title="Notebook View" vid="229">
+        <div class="tool-group" data-tool-group="notebook-actions" vid="249">
+        <span class="tool-group-label" vid="250">Notes</span>
+        <div class="nav-tool-btn notebook-btn active" data-tool-kind="button-action" data-action="notebook.write" title="Write" vid="229">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="230">
+                <path d="M4 20l4-1 11-11-3-3L5 16z" vid="230a"></path>
+                <path d="M14 6l3 3" vid="230b"></path>
+            </svg>
+        </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="notebook.draw" title="Draw" vid="230c">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="230d">
+                <path d="M4 18c3-6 5 2 8-3s5-1 8-8" vid="230e"></path>
+                <path d="M15 5l4-2 2 4" vid="230f"></path>
+            </svg>
+        </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="notebook.erase" title="Erase" vid="230g">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="230h">
+                <path d="M7 16l7-9 5 4-7 9H7z" vid="230i"></path>
+                <path d="M4 20h12" vid="230j"></path>
+            </svg>
+        </div>
+
+        <div class="nav-tool-btn" data-tool-kind="button-action" data-action="notebook.annotate" title="Annotate" vid="230k">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="230l">
+                <path d="M5 5h14v10H8l-3 3z" vid="230m"></path>
+                <path d="M8 9h8" vid="230n"></path>
+            </svg>
+        </div>
+        </div>
+
+        <div class="tool-group" data-tool-group="view-mode" vid="230o">
+        <span class="tool-group-label" vid="230p">View</span>
+        <div class="nav-tool-btn" data-tool-kind="view-mode" data-tool="notebook" title="Notebook View" vid="230q">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" vid="230r">
                 <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" vid="231"></path>
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" vid="232"></path>
             </svg>
@@ -1598,6 +1668,7 @@ video {
 
     <script vid="292">
         const uiState = {
+            activeAction: 'notebook.write',
             magnifierMode: false,
             isCarryingMagnifier: false,
             ignoreNextMagnifierClick: false
@@ -1613,6 +1684,7 @@ video {
 
                 isDragging = true;
                 moved = false;
+                element.dataset.wasDragged = 'false';
                 const rect = element.getBoundingClientRect();
                 offset.x = event.clientX - rect.left;
                 offset.y = event.clientY - rect.top;
@@ -1624,6 +1696,7 @@ video {
                 function onMove(moveEvent) {
                     if (!isDragging) return;
                     moved = true;
+                    element.dataset.wasDragged = 'true';
                     element.style.left = (moveEvent.clientX - offset.x) + 'px';
                     element.style.top = (moveEvent.clientY - offset.y) + 'px';
                 }
@@ -1637,6 +1710,7 @@ video {
                         uiState.ignoreNextMagnifierClick = true;
                         setTimeout(() => { uiState.ignoreNextMagnifierClick = false; }, 80);
                     }
+                    setTimeout(() => { element.dataset.wasDragged = 'false'; }, 80);
                     document.removeEventListener('mousemove', onMove);
                     document.removeEventListener('mouseup', onUp);
                 }
@@ -1841,10 +1915,103 @@ video {
             carrySpawnedObject(sticky, event, 60, 45);
         }
 
+        function spawnClip(event) {
+            const uid = Date.now();
+            const clip = document.createElement('div');
+            clip.className = 'desk-tool spawned-clip';
+            clip.style.cssText = `
+                position: fixed;
+                width: 54px;
+                height: 82px;
+                z-index: 9999;
+                cursor: none;
+                pointer-events: none;
+                transform: rotate(${Math.random() * 30 - 15}deg);
+            `;
+            clip.innerHTML = `
+                <svg width="54" height="82" viewBox="0 0 54 82" style="filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));">
+                    <defs>
+                        <linearGradient id="clipSpawn${uid}" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#d1d5db"/>
+                            <stop offset="50%" stop-color="#f8fafc"/>
+                            <stop offset="100%" stop-color="#94a3b8"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M17 13 L17 57 Q17 68 27 68 Q37 68 37 57 L37 20" stroke="url(#clipSpawn${uid})" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    <path d="M22 22 L22 53 Q22 60 27 60 Q32 60 32 53 L32 27" stroke="#94a3b8" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+            `;
+            carrySpawnedObject(clip, event, 27, 41);
+        }
+
+        function spawnImportedImage(event) {
+            const photo = document.createElement('div');
+            photo.className = 'desk-tool polaroid detail-target';
+            photo.dataset.detailType = 'image';
+            photo.dataset.detailKicker = 'Imported Image';
+            photo.dataset.detailTitle = 'Imported field reference';
+            photo.dataset.detailNote = 'Prototype import target. In production this would open the file picker and attach the selected image.';
+            photo.style.cssText = `
+                position: fixed;
+                width: 180px;
+                z-index: 9999;
+                cursor: none;
+                pointer-events: none;
+                transform: rotate(${Math.random() * 12 - 6}deg);
+            `;
+            photo.innerHTML = `
+                <div class="washi-tape washi-green" style="top: -8px; left: 55px; transform: rotate(-4deg);"></div>
+                <div style="height: 140px; display: grid; place-items: center; background: #e8e0ce; border-radius: 12px;">
+                    <span style="font-family: 'Caveat', cursive; font-size: 22px; color: #6b5b45;">image soon</span>
+                </div>
+                <p class="handwritten text-center mt-2 text-sm">Imported Ref</p>
+            `;
+            wireDetailTarget(photo);
+            carrySpawnedObject(photo, event, 90, 80);
+        }
+
+        function showModeToast(label) {
+            let toast = document.getElementById('mode-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'mode-toast';
+                toast.style.cssText = `
+                    position: fixed;
+                    left: 50%;
+                    bottom: 28px;
+                    transform: translateX(-50%);
+                    z-index: 4000;
+                    background: #fdfaf0;
+                    border: 2px solid rgba(139, 105, 20, 0.35);
+                    border-radius: 999px;
+                    padding: 10px 18px;
+                    box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+                    font-family: 'IBM Plex Mono', monospace;
+                    font-size: 11px;
+                    letter-spacing: 0.12em;
+                    text-transform: uppercase;
+                    color: #3d2b1f;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(toast);
+            }
+            toast.textContent = label;
+            toast.style.opacity = '1';
+            clearTimeout(showModeToast.timer);
+            showModeToast.timer = setTimeout(() => { toast.style.opacity = '0'; }, 1200);
+        }
+
         function setMagnifierMode(active) {
             uiState.magnifierMode = active;
             document.body.classList.toggle('magnifier-mode', active);
             document.querySelector('.magnifier-btn')?.classList.toggle('active', active);
+        }
+
+        function setActiveAction(actionName) {
+            uiState.activeAction = actionName;
+            document.querySelectorAll('[data-action]').forEach((element) => {
+                element.classList.toggle('active', element.dataset.action === actionName && element.classList.contains('nav-tool-btn'));
+            });
         }
 
         function wireDetailTarget(target) {
@@ -1866,27 +2033,77 @@ video {
 
         document.querySelectorAll('.detail-target').forEach(wireDetailTarget);
 
-        const toolSystem = {
-            objectSpawn: {
-                camera: spawnCamera,
-                sticker: spawnSticker,
-                tape: spawnTape,
-                sticky: spawnSticky
+        const actionRegistry = {
+            notebook: {
+                write(event) {
+                    setMagnifierMode(false);
+                    setActiveAction('notebook.write');
+                    showModeToast('Write mode');
+                },
+                draw(event) {
+                    setMagnifierMode(false);
+                    setActiveAction('notebook.draw');
+                    showModeToast('Draw mode');
+                },
+                erase(event) {
+                    setMagnifierMode(false);
+                    setActiveAction('notebook.erase');
+                    showModeToast('Erase mode');
+                },
+                annotate(event) {
+                    setMagnifierMode(false);
+                    setActiveAction('notebook.annotate');
+                    showModeToast('Annotate mode');
+                },
+                zoom(event) {
+                    setActiveAction('notebook.zoom');
+                    setMagnifierMode(!uiState.magnifierMode);
+                }
             },
-            viewMode: {
-                notebook: () => setMagnifierMode(false),
-                magnifier: () => setMagnifierMode(!uiState.magnifierMode),
-                archive: () => setMagnifierMode(false)
+            capture: {
+                openCamera: spawnCamera,
+                importImage: spawnImportedImage,
+                attachReference: spawnClip,
+                convertToSketch(event) {
+                    setMagnifierMode(false);
+                    showModeToast('Sketch conversion queued');
+                    const target = document.querySelector('.polaroid.detail-target') || document.querySelector('.sketch-container.detail-target');
+                    DetailView.open(target);
+                }
+            },
+            scrapbook: {
+                addTape: spawnTape,
+                addSticker: spawnSticker,
+                addLabel: spawnSticky,
+                addClip: spawnClip
+            },
+            view: {
+                notebook() {
+                    setMagnifierMode(false);
+                    setActiveAction('notebook.write');
+                },
+                archive() {
+                    setMagnifierMode(false);
+                    showModeToast('Archive view placeholder');
+                }
             }
         };
 
-        document.querySelectorAll('[data-tool-kind="object-spawn"]').forEach((button) => {
+        function runAction(actionName, event) {
+            const [family, action] = actionName.split('.');
+            const handler = actionRegistry[family]?.[action];
+            if (!handler) return;
+            handler(event);
+        }
+
+        document.querySelectorAll('[data-tool-kind="button-action"]').forEach((button) => {
             button.addEventListener('mousedown', (event) => {
                 event.preventDefault();
                 event.stopPropagation();
+                setActiveAction(button.dataset.action);
                 button.style.transform = 'scale(0.85)';
                 button.style.opacity = '0.7';
-                toolSystem.objectSpawn[button.dataset.tool]?.(event);
+                runAction(button.dataset.action, event);
                 setTimeout(() => {
                     button.style.transform = '';
                     button.style.opacity = '';
@@ -1900,21 +2117,19 @@ video {
                 event.stopPropagation();
                 document.querySelectorAll('[data-tool-kind="view-mode"]').forEach((item) => item.classList.remove('active'));
                 button.classList.add('active');
-                toolSystem.viewMode[button.dataset.tool]?.();
+                if (button.dataset.tool === 'magnifier') actionRegistry.notebook.zoom(event);
+                if (button.dataset.tool === 'notebook') actionRegistry.view.notebook(event);
+                if (button.dataset.tool === 'archive') actionRegistry.view.archive(event);
             });
         });
 
-        const tapePile = document.querySelector('[vid="162"]');
-        const stickyPile = document.querySelector('[vid="176"]');
-        tapePile?.addEventListener('mousedown', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            spawnTape(event);
-        });
-        stickyPile?.addEventListener('mousedown', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            spawnSticky(event);
+        document.querySelectorAll('.desk-tool[data-action]').forEach((object) => {
+            object.addEventListener('click', (event) => {
+                if (object.dataset.wasDragged === 'true') return;
+                event.preventDefault();
+                event.stopPropagation();
+                runAction(object.dataset.action, event);
+            });
         });
 
         const deskMagnifier = document.querySelector('.desk-tool.magnifier');
